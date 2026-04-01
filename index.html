@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>계산기(V5)</title>
+  <!-- ✅ manifest 등록 -->
+  <link rel="manifest" href="manifest.json" />
+  <!-- ✅ TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-4 text-sm min-h-screen">
+
+<h1 class="text-lg font-bold mb-4">● 계산기(V5)</h1>
+
+<!-- 탭 메뉴 -->
+<div class="flex gap-2 mb-4">
+  <button id="tabRally"
+    class="bg-blue-500 text-white px-3 py-1 rounded">
+    집결계산
+  </button>
+
+  <button id="tabMarch"
+    class="bg-gray-300 px-3 py-1 rounded">
+    행군시간
+  </button>
+</div>
+
+<!-- ======================= -->
+<!-- 집결 계산 TAB -->
+<!-- ======================= -->
+
+<div id="rallyTab">
+
+  <!-- ✅ 쉬운 주유 Page -->
+  <section class="bg-white p-4 rounded-lg shadow mb-6">
+    <div class="flex justify-between items-center mb-4" style="max-width: 304px;">
+      <h2 class="font-semibold text-base whitespace-nowrap">◉ 쉬운 주유</h2>
+      <div class="flex gap-2">
+        <button id="btnCopyExplain" class="p-0 bg-transparent border-none">
+  <img src="copy.jpg" class="w-8 h-8">
+</button>
+        <button id="btnCalcExplain" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">계산하기</button>
+      </div>
+    </div>
+    <div class="space-y-1 text-sm text-gray-800">
+      <div><span id="explainStart1"></span></div>
+      <div><span id="explain1"></span></div>
+      <div><span id="explain2"></span></div>
+      <div><span id="explain3"></span></div>
+      <div><span id="explain4"></span></div>
+      <div><span id="explain5"></span></div>
+      <div><span id="explain6"></span></div>
+      <div><span id="explain7"></span></div>
+    </div>
+  </section>
+
+  <!-- ✅ 지정 주유 Page -->
+  <section class="bg-white p-4 rounded-lg shadow mb-6">
+    <div class="flex justify-between items-center mb-4" style="max-width: 304px;">
+      <h2 class="font-semibold text-base whitespace-nowrap">◉ 지정 주유</h2>
+      <div class="flex gap-2">
+        <button id="btnCopyExplain2" class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">복사</button>
+        <button id="btnCalcExplain2" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">계산하기</button>
+      </div>
+    </div>
+    <div class="space-y-1 text-sm text-gray-800">
+      <div><span id="explainStart2"></span></div>
+      <div id="explain2Container"></div>
+    </div>
+  </section>
+
+  <!-- 상대시간 입력 Page -->
+  <section class="bg-white p-4 rounded-lg shadow mb-6">
+    <div class="flex items-center gap-24 flex-nowrap overflow-x-auto whitespace-nowrap mb-5">
+      <h2 class="font-semibold whitespace-nowrap text-base">◉ 상대시간 입력 page</h2>
+      <label class="inline-flex items-center whitespace-nowrap text-sm">
+        <input id="useEnemyTimeCheckbox" type="checkbox" class="mr-1" /> 사용
+      </label>
+    </div>
+    <div class="space-y-2">
+      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+        <label class="w-28 shrink-0 text-blue-600">집결 잔여 시간</label>
+        <input id="rallyRemainTime" type="text" class="border rounded px-2 py-1 w-32 shrink-0 text-blue-600" placeholder="HH:mm:ss" inputmode="numeric" pattern="[0-9]*" />
+        <button id="resetRallyRemainTime" class="bg-gray-300 px-2 py-1 rounded shrink-0">리셋</button>
+      </div>
+      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+        <label class="w-28 shrink-0 text-blue-600">상대 행군 시간</label>
+        <input id="enemyMarchTime" type="text" class="border rounded px-2 py-1 w-32 shrink-0 text-blue-600" placeholder="HH:mm:ss" inputmode="numeric" pattern="[0-9]*" />
+        <button id="resetEnemyMarchTime" class="bg-gray-300 px-2 py-1 rounded shrink-0">리셋</button>
+      </div>
+      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+        <label class="w-28 shrink-0">UTC 시간</label>
+        <input id="utcTime" type="text" class="border rounded px-2 py-1 w-32 shrink-0" placeholder="HH:mm:ss" inputmode="numeric" pattern="[0-9]*" />
+        <button id="resetUtcTime" class="bg-gray-300 px-2 py-1 rounded shrink-0">리셋</button>
+      </div>
+    </div>
+    <div class="mt-4 text-xs text-gray-600">
+      <label class="inline-flex items-center whitespace-nowrap">
+        <input id="useUtcCheckbox" type="checkbox" class="mr-1" /> UTC 자동 사용 (기입 시점 감안 필요)
+      </label>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= -->
+<!-- 행군시간 TAB -->
+<!-- ======================= -->
+
+<div id="marchTab" class="hidden">
+
+  <!-- ✅ 행군시간 입력 Page -->
+<section class="bg-white p-4 rounded-lg shadow mb-6">
+
+  <div class="flex justify-between items-center mb-3">
+    <h2 class="font-semibold text-base">◉ 행군시간 입력</h2>
+    <button id="btnResetMarch" class="bg-gray-300 px-3 py-1 rounded">
+      리셋
+    </button>
+  </div>
+
+  <textarea
+    id="marchBulkInput"
+    class="border rounded w-full p-2 h-56 text-sm"
+    placeholder="(예시)
+갱스터48 CHU52
+Gangsterz35 솜30 쮸르46
+등..">
+  </textarea>
+
+  <div class="text-xs text-gray-500 mt-2">
+    형식 : 아이디뒤에초 입력 (예: 갱스터48)
+  </div>
+
+</section>
+
+</div>
+
+  <!-- ✅ 복사팝업HTML -->
+    <div id="copyPopup"
+    style="
+    display:none;
+    position:fixed;
+    bottom:80px;
+    left:50%;
+    transform:translateX(-50%);
+      background:#f3f4f6;
+      border:1px solid #d1d5db;
+      color:#374151;
+    padding:10px;
+    border-radius:8px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    z-index:1000;
+    ">
+  </div>
+
+  <!-- ✅ 자바스크립트 -->
+  <script src="script.js"></script>
+
+  <!-- ✅ PWA 서비스 워커 등록 -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(registration => {
+            console.log('ServiceWorker 등록 성공:', registration.scope);
+          })
+          .catch(error => {
+            console.error('ServiceWorker 등록 실패:', error);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
