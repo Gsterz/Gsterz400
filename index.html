@@ -10,23 +10,34 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="p-4 text-sm min-h-screen bg-cover bg-center"
-      style="background-image: url('bg.png');">
+<body class="bg-gray-100 p-4 text-sm min-h-screen">
 
-<h1 class="text-lg font-bold mb-4">● 계산기(V5)</h1>
+<!--  타이틀  -->
+<div class="flex justify-between items-center mb-4">
+  <h1 class="text-lg font-bold whitespace-nowrap">● 계산기(V9)</h1>
 
-<!-- 탭 메뉴 -->
-<div class="flex gap-2 mb-4">
-  <button id="tabRally"
-    class="bg-blue-500 text-white px-3 py-1 rounded">
-    집결계산
-  </button>
-
-  <button id="tabMarch"
-    class="bg-gray-300 px-3 py-1 rounded">
-    행군시간
-  </button>
 </div>
+
+  <!-- 탭 메뉴 -->
+  <div class="flex gap-2 mb-4">
+
+    <button id="tabRally" class="bg-blue-500 text-white px-3 py-1 rounded">
+      주유
+    </button>
+
+    <button id="tabSwitch" class="bg-blue-500 text-white px-3 py-1 rounded">
+      스위칭
+    </button>
+
+    <button id="tabCont" class="bg-blue-500 text-white px-3 py-1 rounded">
+      연집
+    </button>
+
+    <button id="tabMarch"
+      class="bg-gray-300 px-3 py-1 rounded ml-14">
+      행군(입력)
+    </button>
+  </div>
 
 <!-- ======================= -->
 <!-- 집결 계산 TAB -->
@@ -35,16 +46,12 @@
 <div id="rallyTab">
 
   <!-- ✅ 쉬운 주유 Page -->
-  <section class="bg-white/40 backdrop-blur-md p-4 rounded-2xl shadow-lg mb-6">
+  <section class="bg-white p-4 rounded-lg shadow mb-6">
     <div class="flex justify-between items-center mb-4" style="max-width: 304px;">
       <h2 class="font-semibold text-base whitespace-nowrap">◉ 쉬운 주유</h2>
       <div class="flex gap-2">
-        <button id="btnCopyExplain" class="p-0 bg-transparent border-none">
-  <img src="copy.jpg" class="w-8 h-8">
-</button>
-        <button id="btnCalcExplain" class="p-0 bg-transparent border-none">
-  <img src="calc.png" class="w-8 h-8">
-</button>
+        <button id="btnCopyExplain" class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">복사</button>
+        <button id="btnCalcExplain" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">계산하기</button>
       </div>
     </div>
     <div class="space-y-1 text-sm text-gray-800">
@@ -60,16 +67,12 @@
   </section>
 
   <!-- ✅ 지정 주유 Page -->
- <section class="bg-white/40 backdrop-blur-md p-4 rounded-2xl shadow-lg mb-6">
+  <section class="bg-white p-4 rounded-lg shadow mb-6">
     <div class="flex justify-between items-center mb-4" style="max-width: 304px;">
       <h2 class="font-semibold text-base whitespace-nowrap">◉ 지정 주유</h2>
       <div class="flex gap-2">
-        <button id="btnCopyExplain2" class="p-0 bg-transparent border-none">
-  <img src="copy.jpg" class="w-8 h-8">
-</button>
-        <button id="btnCalcExplain2" class="p-0 bg-transparent border-none">
-  <img src="calc.png" class="w-8 h-8">
-</button>
+        <button id="btnCopyExplain2" class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">복사</button>
+        <button id="btnCalcExplain2" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">계산하기</button>
       </div>
     </div>
     <div class="space-y-1 text-sm text-gray-800">
@@ -79,7 +82,7 @@
   </section>
 
   <!-- 상대시간 입력 Page -->
-  <section class="bg-white/40 backdrop-blur-md p-4 rounded-2xl shadow-lg mb-6">
+  <section class="bg-white p-4 rounded-lg shadow mb-6">
     <div class="flex items-center gap-24 flex-nowrap overflow-x-auto whitespace-nowrap mb-5">
       <h2 class="font-semibold whitespace-nowrap text-base">◉ 상대시간 입력 page</h2>
       <label class="inline-flex items-center whitespace-nowrap text-sm">
@@ -109,6 +112,29 @@
       </label>
     </div>
   </section>
+
+        <!-- ✅ 검증 입력 Page -->
+<section class="bg-white p-4 rounded-lg shadow mb-6">
+    <div class="flex justify-between items-center mb-4" style="max-width: 304px;">
+      <h2 class="font-semibold text-base whitespace-nowrap">◉ 주유시간 검증</h2>
+      <div class="flex gap-2">
+        <button id="btnLoadMarchTime" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">불러오기</button>
+      </div>
+    </div>
+    <div class="space-y-2">
+      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+        <label class="w-28 shrink-0 text-blue-600">상대 공격시간(계산)</label>
+        <input id="attackEnemyTime" type="text" class="border rounded px-2 py-1 w-32 shrink-0 text-blue-600" placeholder="HH:mm:ss" inputmode="numeric" pattern="[0-9]*" />
+        <button id="resetattackEnemyTime" class="bg-gray-300 px-2 py-1 rounded shrink-0">리셋</button>
+      </div>
+  <div class="text-xs text-gray-500 mt-2 pt-2">
+    # 계산값 > 레포트값 : 상대 행군시간 줄일 것
+  </div>
+  <div class="text-xs text-gray-500 mt-2">
+    # 계산값 < 레포트값 : 상대 행군시간 늘릴 것
+  </div>
+  </section>
+
 </div>
 
 <!-- ======================= -->
@@ -129,7 +155,7 @@
 
   <textarea
     id="marchBulkInput"
-    class="border rounded w-full p-2 h-56 text-sm"
+    class="border rounded w-[298px] p-2 h-56 text-sm"
     placeholder="(예시)
 갱스터48 CHU52
 Gangsterz35 솜30 쮸르46
@@ -141,8 +167,149 @@ Gangsterz35 솜30 쮸르46
   </div>
 
 </section>
-
 </div>
+
+  <!-- ======================= -->
+  <!-- 스위칭 계산 TAB -->
+  <!-- ======================= -->
+
+  <div id="switchTab" class="hidden">
+
+  <!-- ✅ 쉬운 스위칭 Page -->
+  <section class="bg-white p-4 rounded-lg shadow mb-6">
+    <div class="flex justify-between items-center mb-4" style="max-width: 304px;">
+      <h2 class="font-semibold text-base whitespace-nowrap">◉ 쉬운 스위칭</h2>
+      <div class="flex gap-2">
+        <button id="btnCopyExplain3" class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">복사</button>
+        <button id="btnCalcExplain3" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">계산하기</button>
+      </div>
+    </div>
+    <div class="space-y-1 text-sm text-gray-800">
+      <div><span id="explainStart31"></span></div>
+      <div><span id="explain31"></span></div>
+      <div><span id="explain32"></span></div>
+      <div><span id="explain33"></span></div>
+      <div><span id="explain34"></span></div>
+      <div><span id="explain35"></span></div>
+      <div><span id="explain36"></span></div>
+      <div><span id="explain37"></span></div>
+    </div>
+  </section>
+
+  <!-- ✅ 지정 스위칭 Page -->
+  <section class="bg-white p-4 rounded-lg shadow mb-6">
+    <div class="flex justify-between items-center mb-4" style="max-width: 304px;">
+      <h2 class="font-semibold text-base whitespace-nowrap">◉ 지정 스위칭</h2>
+      <div class="flex gap-2">
+        <button id="btnCopyExplain4" class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">복사</button>
+        <button id="btnCalcExplain4" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">계산하기</button>
+      </div>
+    </div>
+    <div class="space-y-1 text-sm text-gray-800">
+      <div><span id="explainStart4"></span></div>
+      <div id="explain4Container"></div>
+    </div>
+  </section>
+
+  <!-- 정보 입력 Page -->
+<section class="bg-white p-4 rounded-lg shadow mb-6">
+    <div class="flex justify-between items-center mb-4" style="max-width: 304px;">
+      <h2 class="font-semibold text-base whitespace-nowrap">◉ 정보 입력 page</h2>
+      <div class="flex gap-2">
+        <button id="copyswitchingTime" class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">복사</button>
+      </div>
+    </div>
+    <div class="space-y-2">
+      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+        <label class="w-28 shrink-0 text-blue-600">스위칭 목표 시간</label>
+        <input id="switchingTime" type="text" class="border rounded px-2 py-1 w-32 shrink-0 text-blue-600" placeholder="HH:mm:ss" inputmode="numeric" pattern="[0-9]*" />
+        <button id="resetswitchingTime" class="bg-gray-300 px-2 py-1 rounded shrink-0">리셋</button>
+      </div>
+      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+        <label class="w-28 shrink-0 text-blue-600">카랠팀 행군 시간</label>
+        <input id="counterMarchTime" type="text" class="border rounded px-2 py-1 w-32 shrink-0 text-blue-600" placeholder="HH:mm:ss" inputmode="numeric" pattern="[0-9]*" />
+        <button id="resetcounterMarchTime" class="bg-gray-300 px-2 py-1 rounded shrink-0">리셋</button>
+     </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap pt-2">
+
+   <button id="nowTime" class="bg-gray-100 px-3 py-1 rounded">
+      현재시간
+    </button>
+
+    <button id="counterTime" class="bg-gray-100 px-3 py-1 rounded">
+      카랠오픈
+    </button>
+
+    <button id="minus10s" class="bg-gray-100 px-3 py-1 rounded ml-5">
+      -10s
+    </button>
+
+    <button id="plus10s"
+      class="bg-gray-100 px-3 py-1 rounded">
+      +10s
+    </button>
+  </div>
+
+
+  <div class="text-xs text-gray-500 mt-2">
+    # 스위칭 목표시간 : +10s~20s 적용 권장
+  </div>
+
+  </section>
+</div>
+
+<!-- ======================= -->
+<!-- 연집 TAB -->
+<!-- ======================= -->
+
+    <div id="contTab" class="hidden">
+
+  <!-- ✅ 연집 Page -->
+  <section class="bg-white p-4 rounded-lg shadow mb-6">
+    <div class="flex justify-between items-center mb-4" style="max-width: 304px;">
+      <h2 class="font-semibold text-base whitespace-nowrap">◉ 연속 집결 계산</h2>
+      <div class="flex gap-2">
+        <button id="btnCopyExplain5" class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">복사</button>
+        <button id="btnCalcExplain5" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">계산하기</button>
+      </div>
+    </div>
+      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+        <label class="w-28 shrink-0 text-blue-600">집결 오픈 시간</label>
+        <input id="attackrallyStartTime" type="text" class="border rounded px-2 py-1 w-32 shrink-0 text-blue-600" placeholder="HH:mm:ss" inputmode="numeric" pattern="[0-9]*" />
+        <button id="resetattackrallyStartTime" class="bg-gray-300 px-2 py-1 rounded shrink-0">리셋</button>
+     </div>
+
+    <div class="space-y-1 text-sm text-gray-800">
+      <div><span id="explainStart5"></span></div>
+      <div id="explain5Container"></div>
+    </div>
+  </section>
+
+      <!-- ✅ 연집행군시간 입력 Page -->
+    <section class="bg-white p-4 rounded-lg shadow mb-6">
+
+      <div class="flex justify-between items-center mb-3" style="max-width: 304px;" >
+        <h2 class="font-semibold text-base">◉ 행군시간 입력</h2>
+        <button id="resetattackMarchTime" class="bg-gray-300 px-3 py-1 rounded">
+          리셋
+        </button>
+      </div>
+
+<textarea
+    id="marchBulkInput2"
+    class="border rounded w-[298px] p-2 h-20 text-sm"
+    placeholder="(예시)
+갱스터48 CHU52 솜30
+등..">
+  </textarea>
+
+  <div class="text-xs text-gray-500 mt-2">
+    형식 : 아이디뒤에초 입력 (예: 갱스터48)
+  </div>
+
+      </section>
+      </div>
 
   <!-- ✅ 복사팝업HTML -->
     <div id="copyPopup"
